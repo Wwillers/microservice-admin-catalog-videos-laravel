@@ -19,7 +19,7 @@ class ListCategoryUseCase {
         return new ListCategoryOutputDTO(
             id: $category->id(),
             name: $category->name,
-            active: $category->isActive,
+            is_active: $category->isActive,
             created_at: $category->createdAt(),
             description: $category->description
         );

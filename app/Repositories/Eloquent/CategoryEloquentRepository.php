@@ -79,6 +79,9 @@ class CategoryEloquentRepository implements CategoryRepository {
         return new EntityCategory(
             id: $object->id,
             name: $object->name,
+            description: $object->description,
+            isActive: $object->is_active,
+            createdAt: $object->created_at
         );
     }
 }
