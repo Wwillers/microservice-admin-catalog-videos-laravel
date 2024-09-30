@@ -14,6 +14,18 @@ class PaginationPresenter implements Pagination {
         $this->items = $this->resolveItems($this->paginator->items());
     }
 
+    private function resolveItems(array $items): array {
+        $response = [];
+        foreach ($items as $item) {
+            $stdClass = new stdClass;
+            foreach ($item->toArray() as $key => $value) {
+                $stdClass->{$key} = $value;
+            }
+            $response[] = $stdClass;
+        }
+        return $response;
+    }
+
     /**
      * @return stdClass[]
      */
@@ -47,17 +59,5 @@ class PaginationPresenter implements Pagination {
 
     public function from(): int {
         return $this->paginator->lastItem() ?? 0;
-    }
-
-    private function resolveItems(array $items): array {
-        $response = [];
-        foreach ($items as $item) {
-            $stdClass = new stdClass;
-            foreach ($item->toArray() as $key => $value) {
-                $stdClass->{$key} = $value;
-            }
-            $response[] = $stdClass;
-        }
-        return $response;
     }
 }

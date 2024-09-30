@@ -3,7 +3,6 @@
 namespace core\domain\repository;
 
 use core\domain\entity\Category;
-use core\domain\repository\Pagination;
 
 interface CategoryRepository {
 

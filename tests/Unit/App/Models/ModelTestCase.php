@@ -2,9 +2,7 @@
 
 namespace Tests\Unit\App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use PHPUnit\Framework\TestCase;
 
 abstract class ModelTestCase extends TestCase {
@@ -17,11 +15,17 @@ abstract class ModelTestCase extends TestCase {
         $this->assertEquals($expected, $traits);
     }
 
+    abstract protected function traits(): array;
+
+    abstract protected function model(): Model;
+
     public function testFillables() {
         $expected = $this->fillables();
         $fillables = $this->model()->getFillable();
         $this->assertEquals($expected, $fillables);
     }
+
+    abstract protected function fillables(): array;
 
     public function testIncrementingIsFalse() {
         $model = $this->model();
@@ -33,12 +37,6 @@ abstract class ModelTestCase extends TestCase {
         $casts = $this->model()->getCasts();
         $this->assertEquals($expected, $casts);
     }
-
-    abstract protected function model(): Model;
-
-    abstract protected function traits(): array;
-
-    abstract protected function fillables(): array;
 
     abstract protected function casts(): array;
 }

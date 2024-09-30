@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\application\category;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
 use core\application\category\ListCategoriesUseCase;
 use core\application\dto\category\ListCategoriesInputDTO;
 use core\application\dto\category\ListCategoriesOutputDTO;
 use core\domain\repository\CategoryRepository;
 use core\domain\repository\Pagination;
+use Mockery;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
 class ListCategoriesUnitTest extends TestCase {
@@ -27,6 +27,24 @@ class ListCategoriesUnitTest extends TestCase {
 
         $this->assertInstanceOf(ListCategoriesOutputDTO::class, $response);
         $this->assertCount(0, $response->items);
+    }
+
+    private function mockPagination(array $items = []): Pagination {
+        $mockPagination = Mockery::mock(stdClass::class, Pagination::class);
+        $mockPagination->shouldReceive('items')->andReturn($items);
+        $mockPagination->shouldReceive('totalItems')->andReturn(0);
+        $mockPagination->shouldReceive('firstPage')->andReturn(1);
+        $mockPagination->shouldReceive('lastPage')->andReturn(1);
+        $mockPagination->shouldReceive('currentPage')->andReturn(1);
+        $mockPagination->shouldReceive('perPage')->andReturn(10);
+        $mockPagination->shouldReceive('to')->andReturn(0);
+        $mockPagination->shouldReceive('from')->andReturn(0);
+
+        return $mockPagination;
+    }
+
+    private function createListCategoriesDTO(): ListCategoriesInputDTO {
+        return new ListCategoriesInputDTO("id", "asc", 1, 10);
     }
 
     public function testListCategories() {
@@ -59,23 +77,5 @@ class ListCategoriesUnitTest extends TestCase {
     protected function tearDown(): void {
         Mockery::close();
         parent::tearDown();
-    }
-
-    private function mockPagination(array $items = []): Pagination {
-        $mockPagination = Mockery::mock(stdClass::class, Pagination::class);
-        $mockPagination->shouldReceive('items')->andReturn($items);
-        $mockPagination->shouldReceive('totalItems')->andReturn(0);
-        $mockPagination->shouldReceive('firstPage')->andReturn(1);
-        $mockPagination->shouldReceive('lastPage')->andReturn(1);
-        $mockPagination->shouldReceive('currentPage')->andReturn(1);
-        $mockPagination->shouldReceive('perPage')->andReturn(10);
-        $mockPagination->shouldReceive('to')->andReturn(0);
-        $mockPagination->shouldReceive('from')->andReturn(0);
-
-        return $mockPagination;
-    }
-
-    private function createListCategoriesDTO(): ListCategoriesInputDTO {
-        return new ListCategoriesInputDTO("id", "asc", 1, 10);
     }
 }

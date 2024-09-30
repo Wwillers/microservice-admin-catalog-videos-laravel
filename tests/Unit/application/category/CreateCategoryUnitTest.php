@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\application\category;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 use core\application\category\CreateCategoryUseCase;
 use core\application\dto\category\CreateCategoryInputDTO;
 use core\application\dto\category\CreateCategoryOutputDTO;
 use core\domain\entity\Category;
 use core\domain\repository\CategoryRepository;
+use Mockery;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 class CreateCategoryUnitTest extends TestCase {
@@ -34,12 +34,12 @@ class CreateCategoryUnitTest extends TestCase {
         Mockery::close();
     }
 
+    private function createCategoryDTO(): CreateCategoryInputDTO {
+        return new CreateCategoryInputDTO('New Category Name', 'New Category Description');
+    }
+
     protected function tearDown(): void {
         Mockery::close();
         parent::tearDown();
-    }
-
-    private function createCategoryDTO(): CreateCategoryInputDTO {
-        return new CreateCategoryInputDTO('New Category Name', 'New Category Description');
     }
 }

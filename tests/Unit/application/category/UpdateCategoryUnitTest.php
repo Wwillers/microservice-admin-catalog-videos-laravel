@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\application\category;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 use core\application\category\UpdateCategoryUseCase;
 use core\application\dto\category\UpdateCategoryInputDTO;
 use core\application\dto\category\UpdateCategoryOutputDTO;
 use core\domain\entity\Category;
 use core\domain\repository\CategoryRepository;
+use Mockery;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 class UpdateCategoryUnitTest extends TestCase {
@@ -37,15 +37,15 @@ class UpdateCategoryUnitTest extends TestCase {
         $this->assertEquals($uuid, $category->id);
     }
 
-    protected function tearDown(): void {
-        Mockery::close();
-        parent::tearDown();
-    }
-
     private function createUpdateCategoryDTO(string $uuid): UpdateCategoryInputDTO {
         return new UpdateCategoryInputDTO(
             id: $uuid,
             name: 'New Category Name',
         );
+    }
+
+    protected function tearDown(): void {
+        Mockery::close();
+        parent::tearDown();
     }
 }

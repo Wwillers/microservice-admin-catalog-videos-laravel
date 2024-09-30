@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\domain\entity;
 
-use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 use core\domain\entity\Category;
 use core\domain\exception\EntityValidationException;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Throwable;
 
 class CategoryUnitTest extends TestCase {

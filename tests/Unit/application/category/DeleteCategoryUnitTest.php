@@ -2,14 +2,13 @@
 
 namespace Tests\Unit\application\category;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 use core\application\category\DeleteCategoryUseCase;
 use core\application\dto\category\DeleteCategoryInputDTO;
 use core\application\dto\category\DeleteCategoryOutputDTO;
-use core\domain\entity\Category;
 use core\domain\repository\CategoryRepository;
+use Mockery;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 class DeleteCategoryUnitTest extends TestCase {

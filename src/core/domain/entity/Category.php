@@ -2,20 +2,20 @@
 
 namespace core\domain\entity;
 
-use DateTime;
 use core\domain\entity\traits\MagicMethodsTrait;
 use core\domain\validation\DomainValidation;
 use core\domain\valueObject\Uuid;
+use DateTime;
 
 class Category {
 
     use MagicMethodsTrait;
 
     public function __construct(
-        protected Uuid|string $id = '',
-        protected string      $name = '',
-        protected string      $description = '',
-        protected bool        $isActive = true,
+        protected Uuid|string     $id = '',
+        protected string          $name = '',
+        protected string          $description = '',
+        protected bool            $isActive = true,
         protected DateTime|string $createdAt = '',
     ) {
         $this->id = $this->id
@@ -25,6 +25,12 @@ class Category {
             ? new DateTime($this->createdAt)
             : new DateTime();
         $this->validate();
+    }
+
+    private function validate(): void {
+        DomainValidation::strMaxLength($this->name);
+        DomainValidation::strMinLength($this->name);
+        DomainValidation::strCanBeNullAndMaxLength($this->description);
     }
 
     public function activate(): void {
@@ -38,11 +44,5 @@ class Category {
     public function update(string $name, string $description = ''): void {
         $this->name = $name;
         $this->description = $description;
-    }
-
-    private function validate(): void {
-        DomainValidation::strMaxLength($this->name);
-        DomainValidation::strMinLength($this->name);
-        DomainValidation::strCanBeNullAndMaxLength($this->description);
     }
 }

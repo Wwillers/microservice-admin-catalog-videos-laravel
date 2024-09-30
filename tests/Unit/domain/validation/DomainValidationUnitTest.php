@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\domain\validation;
 
-use PHPUnit\Framework\TestCase;
 use core\domain\exception\EntityValidationException;
 use core\domain\validation\DomainValidation;
+use PHPUnit\Framework\TestCase;
 
 class DomainValidationUnitTest extends TestCase {
 

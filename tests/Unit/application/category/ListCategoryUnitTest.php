@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\application\category;
 
-use Mockery;
-use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
 use core\application\category\ListCategoryUseCase;
 use core\application\dto\category\ListCategoryInputDTO;
 use core\application\dto\category\ListCategoryOutputDTO;
 use core\domain\entity\Category;
 use core\domain\repository\CategoryRepository;
+use Mockery;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 class ListCategoryUnitTest extends TestCase {
@@ -32,12 +32,12 @@ class ListCategoryUnitTest extends TestCase {
         $this->assertEquals('Category Description', $response->description);
     }
 
-    protected function tearDown():void {
-        Mockery::close();
-        parent::tearDown();
+    private function createListCategoryDTO(string $uuid): ListCategoryInputDTO {
+        return new ListCategoryInputDTO($uuid);
     }
 
-    private function createListCategoryDTO(String $uuid): ListCategoryInputDTO {
-        return new ListCategoryInputDTO($uuid);
+    protected function tearDown(): void {
+        Mockery::close();
+        parent::tearDown();
     }
 }
